@@ -48,7 +48,7 @@ function initGame(){
     ballBd.linearDamping = .03;
     ballBd.allowSleep = false;
     ballBd.AddShape(ballSd);
-    ballBd.position.Set(200,200);
+    ballBd.position.Set(300,300);
     player.object = world.CreateBody(ballBd);
     
 }

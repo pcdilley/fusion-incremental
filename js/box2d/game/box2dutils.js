@@ -57,7 +57,7 @@ function drawShape(shape, context) {
 			var circle = shape;
 			var pos = circle.m_position;
 			var r = circle.m_radius;
-			var segments = 128.0;
+			var segments = 8.0;
 			var theta = 0.0;
 			var dtheta = 2.0 * Math.PI / segments;
 			// draw circle
@@ -104,18 +104,20 @@ function createWorld() {
 }
 
 function createGround(world) {
+    var radius = 400;
+    var pi = 3.1415926535;
+    var step = pi/128;
+    var posx = 0;
+    var posy = 0;
+    for(let angle = 0; angle <  pi*2; angle = angle+step)
+    {
+	posy = radius + Math.cos(angle)*radius;
+	posx = radius + Math.sin(angle)*radius;
 
-
-
-    var containerSd = new b2CircleDef();
-    containerSd.radius=300;
-    var containerBd = new b2BodyDef();
-    containerBd.type=b2Body.b2_staticBody //set bounding circle static
-    containerBd.AddShape(containerSd);
-    containerBd.position.Set(300,300);
-    return world.CreateBody(containerBd)
-
-    
+	console.log(posx, posy, angle);
+	createBox(world, posx, posy, step*radius/2, 1, angle, true);
+    }
+    return true;    
 }
 
 function createBall(world, x, y) {
@@ -130,17 +132,20 @@ function createBall(world, x, y) {
 	return world.CreateBody(ballBd);
 }
 
-function createBox(world, x, y, width, height, fixed, userData) {
-	if (typeof(fixed) == 'undefined') fixed = true;
-	var boxSd = new b2BoxDef();
-	if (!fixed) boxSd.density = 1.0;
+function createBox(world, x, y, width, height, angle, fixed, userData) {
+    if (typeof(fixed) == 'undefined') fixed = true;
+    var boxSd = new b2BoxDef();
+    if (!fixed) boxSd.density = 1.0;
 	
-	boxSd.userData = userData;
+    boxSd.userData = userData;
 	
-	boxSd.extents.Set(width, height);
-	var boxBd = new b2BodyDef();
-	boxBd.AddShape(boxSd);
-	boxBd.position.Set(x,y);
+    boxSd.extents.Set(width, height);
+
+    var boxBd = new b2BodyDef();
+    boxBd.AddShape(boxSd);
+    boxBd.angle=angle;
+    boxBd.position.Set(x,y);
+
 	return world.CreateBody(boxBd)
 }
 
