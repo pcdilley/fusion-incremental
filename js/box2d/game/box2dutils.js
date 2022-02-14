@@ -57,7 +57,7 @@ function drawShape(shape, context) {
 			var circle = shape;
 			var pos = circle.m_position;
 			var r = circle.m_radius;
-			var segments = 16.0;
+			var segments = 128.0;
 			var theta = 0.0;
 			var dtheta = 2.0 * Math.PI / segments;
 			// draw circle
@@ -71,10 +71,10 @@ function drawShape(shape, context) {
 			context.lineTo(pos.x + r, pos.y);
 	
 			// draw radius
-			context.moveTo(pos.x, pos.y);
-			var ax = circle.m_R.col1;
-			var pos2 = new b2Vec2(pos.x + r * ax.x, pos.y + r * ax.y);
-			context.lineTo(pos2.x, pos2.y);
+//			context.moveTo(pos.x, pos.y);
+//			var ax = circle.m_R.col1;
+//			var pos2 = new b2Vec2(pos.x + r * ax.x, pos.y + r * ax.y);
+//			context.lineTo(pos2.x, pos2.y);
 		}
 		break;
 	case b2Shape.e_polyShape:
@@ -104,13 +104,18 @@ function createWorld() {
 }
 
 function createGround(world) {
+
+
+
     var containerSd = new b2CircleDef();
-    containerSd.radius=50;
+    containerSd.radius=300;
     var containerBd = new b2BodyDef();
-    containerBd.type=b2_staticBody //set bounding circle static
+    containerBd.type=b2Body.b2_staticBody //set bounding circle static
     containerBd.AddShape(containerSd);
-    containerBd.position.Set(0,0);
+    containerBd.position.Set(300,300);
     return world.CreateBody(containerBd)
+
+    
 }
 
 function createBall(world, x, y) {
