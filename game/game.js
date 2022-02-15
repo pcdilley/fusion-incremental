@@ -19,18 +19,35 @@ Event.observe(window, 'load', function() {
 
 
 function raiseHeat() {
-    heat++;
-    console.log("heat is now", heat);
+    ambientheat = ambientheat + 400 / totalmass;
+    console.log("heat is now", ambientheat);
 }
 
 function initGame(){
     createCore(world);
+    spawnH();
     
 }
 
 function step() {
-    handleInteractions();
-    
+    //Collision code "borrowed" from https://stackoverflow.com/questions/8982349/on-collision-event-handlers-in-box2djs by John Carter
+    var aContact;
+    for( aContact = world.m_contactList; aContact != null; aContact = aContact.m_next) {
+	var cBody1 = aContact.m_shape1.m_body;
+	var cBody2 = aContact.m_shape2.m_body;
+
+	var udObj1 = cBody1.GetUserData();
+	var udObj2 = cBody2.GetUserData();
+
+	if( udObj2 == null || udObj1 == null)
+	    continue;
+
+	if( typeof(udObj1) == "object" && typeof(udObj2) == "object")
+	    fuseParticles(udObj1, udObj2);
+
+    }
+	
+//    handleInteractions();
     var stepping = false;
     var timeStep = 1.0/60;
     var iteration = 1;
@@ -45,17 +62,19 @@ function step() {
 
 }
 
-function handleInteractions(){
-    var collision = world.m_contactList;
-    //TODO: adjust speed on collision
-	if (collision != null){
-		if (collision.GetShape1().GetUserData() == 'player' || collision.GetShape2().GetUserData() == 'player'){
-			if ((collision.GetShape1().GetUserData() == 'ground' || collision.GetShape2().GetUserData() == 'ground')){
-				var groundObj = (collision.GetShape1().GetUserData() == 'ground' ? collision.GetShape1().GetPosition() :  collision.GetShape2().GetPosition());
-				if (playerObj.y < groundObj.y){
-					player.canJump = true;
-				}
-			}
-		}
-	}
-}
+// function handleInteractions(){
+//     var collision = world.m_contactList;
+//     //TODO: adjust speed on collision
+    
+// 	if (collision != null){
+// 		if (collision.GetShape1().GetUserData() == 'player' || collision.GetShape2().GetUserData() == 'player'){
+// 			if ((collision.GetShape1().GetUserData() == 'ground' || collision.GetShape2().GetUserData() == 'ground')){
+// 				var groundObj = (collision.GetShape1().GetUserData() == 'ground' ? collision.GetShape1().GetPosition() :  collision.GetShape2().GetPosition());
+// 				if (playerObj.y < groundObj.y){
+// 					player.canJump = true;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
