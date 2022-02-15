@@ -1,0 +1,3 @@
+#!/bin/bash
+
+emacs ~/documents/prog/fusion/game/box2dutils.js  ~/documents/prog/fusion/game/game.js
