@@ -97,7 +97,7 @@ function createWorld() {
     var worldAABB = new b2AABB();
     worldAABB.minVertex.Set(-1000, -1000);
     worldAABB.maxVertex.Set(1000, 1000);
-    var gravity = new b2Vec2(0, 300);
+    var gravity = new b2Vec2(0, 0);
     var doSleep = true;
     var world = new b2World(worldAABB, gravity, doSleep);
     return world;
@@ -106,16 +106,16 @@ function createWorld() {
 function createGround(world) {
     var radius = 400;
     var pi = 3.1415926535;
-    var step = pi/128;
+    var step = pi/64;
     var posx = 0;
     var posy = 0;
-    for(let angle = 0; angle <  pi*2; angle = angle+step)
+    for(let angle = 0; angle <  pi*2+.1; angle = angle+step)
     {
-	posy = radius + Math.cos(angle)*radius;
-	posx = radius + Math.sin(angle)*radius;
+	posy = radius+20 + Math.cos(angle)*radius;
+	posx = radius+20 + Math.sin(angle)*radius;
 
 	console.log(posx, posy, angle);
-	createBox(world, posx, posy, step*radius/2, 1, angle, true);
+	createBox(world, posx, posy, step*radius/2, 2, -angle);
     }
     return true;    
 }
@@ -132,21 +132,17 @@ function createBall(world, x, y) {
 	return world.CreateBody(ballBd);
 }
 
-function createBox(world, x, y, width, height, angle, fixed, userData) {
-    if (typeof(fixed) == 'undefined') fixed = true;
+function createBox(world, x, y, width, height, angle, userData) {
     var boxSd = new b2BoxDef();
-    if (!fixed) boxSd.density = 1.0;
-	
+    
     boxSd.userData = userData;
-	
+    
     boxSd.extents.Set(width, height);
-
+    boxSd.localRotation = angle;
     var boxBd = new b2BodyDef();
     boxBd.AddShape(boxSd);
-    boxBd.angle=angle;
     boxBd.position.Set(x,y);
-
-	return world.CreateBody(boxBd)
+    return world.CreateBody(boxBd);
 }
 
 
