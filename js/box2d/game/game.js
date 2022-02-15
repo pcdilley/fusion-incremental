@@ -1,8 +1,4 @@
 var initId = 0;
-var player = function(){
-    this.object=null;
-    this.canJump=false;
-};
 var world;
 var ctx;
 var canvasWidth;
@@ -19,14 +15,8 @@ Event.observe(window, 'load', function() {
     canvasHeight = parseInt(canvasElm.height);
     initGame(); // 3
     step(); // 4
-    window.addEventListener('keydown',handleKeyDown,true); //5 
-    window.addEventListener('keyup',handleKeyUp,true);
 });
 
-function incrementH() {
-    hydrogen++;
-    console.log(hydrogen);
- }
 
 function raiseHeat() {
     heat++;
@@ -34,24 +24,10 @@ function raiseHeat() {
 }
 
 function initGame(){
-    // create circle boundary
     createGround(world);
     
-    // create player ball
-    var ballSd = new b2CircleDef();
-    ballSd.density = 0.1;
-    ballSd.radius = 12;
-    ballSd.restitution = 0.5;
-    ballSd.friction = 1;
-    ballSd.userData = 'player';
-    var ballBd = new b2BodyDef();
-    ballBd.linearDamping = .03;
-    ballBd.allowSleep = false;
-    ballBd.AddShape(ballSd);
-    ballBd.position.Set(300,300);
-    player.object = world.CreateBody(ballBd);
-    
 }
+
 function step() {
     handleInteractions();
     
@@ -68,10 +44,7 @@ function step() {
 }
 
 function handleInteractions(){
-	// up arrow
-	// 1
 	var collision = world.m_contactList;
-	player.canJump = false;
 	if (collision != null){
 		if (collision.GetShape1().GetUserData() == 'player' || collision.GetShape2().GetUserData() == 'player'){
 			if ((collision.GetShape1().GetUserData() == 'ground' || collision.GetShape2().GetUserData() == 'ground')){
@@ -83,24 +56,6 @@ function handleInteractions(){
 			}
 		}
 	}
-	// 2
-	var vel = player.object.GetLinearVelocity();
-	// 3
-	if (keys[38] && player.canJump){
-		vel.y = -150;	
-	}
-	
-	// 4
-	// left/right arrows
-	if (keys[37]){
-		vel.x = -60;
-	}
-	else if (keys[39]){
-		vel.x = 60;
-	}
-	
-	// 5
-	player.object.SetLinearVelocity(vel);
 }
 
 
