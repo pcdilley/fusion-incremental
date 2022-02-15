@@ -24,7 +24,7 @@ function raiseHeat() {
 }
 
 function initGame(){
-    createGround(world);
+    createCore(world);
     
 }
 

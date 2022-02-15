@@ -59,7 +59,7 @@ function createWorld() {
     return world;
 }
 
-function createGround(world) {
+function createCore(world) {
     var step = pi/64;
     var posx = 0;
     var posy = 0;
@@ -67,9 +67,8 @@ function createGround(world) {
     {
 	posy = radius+20 + Math.cos(angle)*radius;
 	posx = radius+20 + Math.sin(angle)*radius;
-
 	console.log(posx, posy, angle);
-	createBox(world, posx, posy, step*radius/2, 2, -angle);
+	createBox(world, posx, posy, step*radius/2, 5, -angle);
     }
     return true;    
 }
@@ -78,7 +77,7 @@ function createBall(world, x, y) {
 	var ballSd = new b2CircleDef();
 	ballSd.density = 1.0;
 	ballSd.radius = 20;
-	ballSd.restitution = .9;
+	ballSd.restitution = 1;
 	ballSd.friction = 0;
 	var ballBd = new b2BodyDef();
 	ballBd.AddShape(ballSd);
@@ -104,10 +103,12 @@ function spawnH() {
     var ballSd = new b2CircleDef();
     ballSd.density = 1.0;
     ballSd.radius = 5;
-    ballSd.restitution = .9;
+    ballSd.restitution = .95;
     ballSd.friction = 0;
     var ballBd = new b2BodyDef();
     ballBd.AddShape(ballSd);
+    //TODO add user data for Z, n.  T?
+    
     var xpos = radius;
     var ypos = radius;
     while (xpos*xpos+ypos*ypos > (radius-50)*(radius-50)) {
