@@ -1,6 +1,7 @@
 decayMatrix = {
     z = 0, t=1,613.9 s 6, types = { B: 100; } //probably not right.  List of decay products could be condensed if reversed?
-1,0,STABLE
+
+    1,0,STABLE
 1,1,STABLE,
 1,2,12.32 y 2,B- = 100.00
 1,3,,N = 100.00

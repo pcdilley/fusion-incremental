@@ -1,6 +1,6 @@
 var radius = 400;
 var pi = 3.1415926535;
-var ambientheat = 400;
+var ambientheat = 1200;
 var totalmass = 1;
     //Collision code "borrowed" from https://stackoverflow.com/questions/8982349/on-collision-event-handlers-in-box2djs by John Carter
 var FusionCollisionCallback = function() {
@@ -9,9 +9,7 @@ var FusionCollisionCallback = function() {
 	var bd1 = shape1.m_body;
 	var bd2 = shape2.m_body;
 	if(bd1.UserData) { //check if it's an atom
-	    console.log("fuuck yeah it's hydrogen");
 	    if(bd2.UserData) {
-		console.log("houston, we have ignition")// if both are atoms, fuse code
 	    }
 	}
 
@@ -155,5 +153,23 @@ function spawnH() {
 
 function fuseParticles(par1, par2) {
     //TODO fuse code
-    console.log("houston, we have ignition");
+    var ud1=par1.GetUserData();
+    var ud2=par2.GetUserData();
+    
+    var te = ud1[2]*(ud1[0]+ud1[1]) + ud2[2]*(ud2[0]+ud2[1]) //calculate thermal energy as temperature times mass of each particle; approximates based on 
+    //calculate mass energy of particle pairings
+    
+    
+    console.log("houston, we have ignition, temp is", te);
+    var newz=ud1[0]+ud2[0];
+    var newn=ud1[1]+ud2[1];
+    console.log("next we attempt to FUSE into ", newz, newn);
+
+    if (atoms[newz] != null) {
+	console.log("wow!  it's happening!  new atom can have between ", atoms[newz], " and ", " neutrons");
+    }
+    
 }
+
+
+//2D array of element objects?  Element object contains { mass energy excess, [decay modes, chances, energy], decay time, thermal neutron capture? fusion chance?} ?

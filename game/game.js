@@ -39,15 +39,15 @@ function step() {
 	var udObj1 = cBody1.GetUserData();
 	var udObj2 = cBody2.GetUserData();
 
-	if( udObj2 == null || udObj1 == null)
+	if( udObj2 == null || udObj1 == null )
 	    continue;
 
 	if( typeof(udObj1) == "object" && typeof(udObj2) == "object")
-	    fuseParticles(udObj1, udObj2);
-
+	    fuseParticles(cBody1, cBody2);
+	    
     }
 	
-//    handleInteractions();
+
     var stepping = false;
     var timeStep = 1.0/60;
     var iteration = 1;
@@ -61,20 +61,3 @@ function step() {
 
 
 }
-
-// function handleInteractions(){
-//     var collision = world.m_contactList;
-//     //TODO: adjust speed on collision
-    
-// 	if (collision != null){
-// 		if (collision.GetShape1().GetUserData() == 'player' || collision.GetShape2().GetUserData() == 'player'){
-// 			if ((collision.GetShape1().GetUserData() == 'ground' || collision.GetShape2().GetUserData() == 'ground')){
-// 				var groundObj = (collision.GetShape1().GetUserData() == 'ground' ? collision.GetShape1().GetPosition() :  collision.GetShape2().GetPosition());
-// 				if (playerObj.y < groundObj.y){
-// 					player.canJump = true;
-// 				}
-// 			}
-// 		}
-// 	}
-// }
-
