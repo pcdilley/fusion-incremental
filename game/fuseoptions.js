@@ -1,9 +1,4 @@
 //need to create fusion options and a handler to pick an adequate option.
-//#definitions
-//e decay:0
-//a decay:1
-//b decay:2
-
 
 
 let atoms = [];
@@ -12,7 +7,7 @@ atoms.push({z:1, nm:0, nx:3, me:[7288,13135,14949,24620],hl:[null,null,[3.9e8,"n
 atoms.push({z:2, nm:1, nx:6, me:[14931,2424,11231,17592,26073,31609],hl:[null,null,[1e-6,"n"],[.8,"b"],[1e-6,"n"],[.12,"b"]]});
 
 
-//nuke weight excess
+//nuke weight excess (KeV)
 // 0,1,8071
 // 1,0,7288
 // 1,1,13135

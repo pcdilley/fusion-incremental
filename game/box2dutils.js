@@ -1,8 +1,11 @@
 var radius = 400;
-var pi = 3.1415926535;
-var ambientheat = 1200;
-var totalmass = 1;
-    //Collision code "borrowed" from https://stackoverflow.com/questions/8982349/on-collision-event-handlers-in-box2djs by John Carter
+var ambientheat = 15000000;
+var totalmass = 30;
+
+let kb = 8.617333e-5
+let pi = 3.1415926535;
+
+//Collision code "borrowed" from https://stackoverflow.com/questions/8982349/on-collision-event-handlers-in-box2djs by John Carter
 var FusionCollisionCallback = function() {
     this.ShouldCollide = function(shape1, shape2)
     {
@@ -129,7 +132,7 @@ function createBox(world, x, y, width, height, angle, userData) {
 
 function spawnH() {
     //TODO: need to evaluate balance of this formula
-    ambientheat = (ambientheat+10)*(totalmass/(totalmass+1))
+    //ambientheat = (ambientheat)*(totalmass/(totalmass+1))
     totalmass++;
     var ballSd = new b2CircleDef();
     ballSd.density = 1.0;
@@ -138,7 +141,7 @@ function spawnH() {
     ballSd.friction = 0;
     var ballBd = new b2BodyDef();
     ballBd.AddShape(ballSd);
-    ballBd.userData = [1, 0, ambientheat]; //adds initial values for H
+    ballBd.userData = [1, 0, Math.sqrt(ambientheat)]; //adds initial values for H
     var xpos = radius;
     var ypos = radius;
     while (xpos*xpos+ypos*ypos > (radius-50)*(radius-50)) {
@@ -156,20 +159,47 @@ function fuseParticles(par1, par2) {
     var ud1=par1.GetUserData();
     var ud2=par2.GetUserData();
     
-    var te = ud1[2]*(ud1[0]+ud1[1]) + ud2[2]*(ud2[0]+ud2[1]) //calculate thermal energy as temperature times mass of each particle; approximates based on 
+    var te = (ud1[2] + ud2[2]) *1.5 * kb   //thermal energy is kb * 3/2 * T per particle (eV)
     //calculate mass energy of particle pairings
-    
+    //atoms contains atom objects: {z, nm, nx, me:[KeV],hl:[s]}
+    var atom1 = atoms[ud1[0]];
+    var atom2 = atoms[ud2[0]];
+    console.log("thermal energy is ", te, " and atomic mass excesses are ", atom1.me[ud1[1]], " and ", atom2.me[ud2[1]], "eV");
+    te = te - atom1.me[ud1[1]]*1000 - atom2.me[ud2[1]]*1000;
     
     console.log("houston, we have ignition, temp is", te);
     var newz=ud1[0]+ud2[0];
     var newn=ud1[1]+ud2[1];
     console.log("next we attempt to FUSE into ", newz, newn);
 
-    if (atoms[newz] != null) {
-	console.log("wow!  it's happening!  new atom can have between ", atoms[newz], " and ", " neutrons");
+    var newatom = atoms[newz];
+    if (newatom != null) {
+	console.log("wow!  it's happening!  new atom can have between ", newatom.nm, " and ", newatom.nx, " neutrons");
+
+	//fuse code here//
+	
+	if(newatom.nm > newn){ //if there aren't enough neutrons
+	    //positron decay (or epsilon, but not now)
+	    //use proton (938.27209 MeV) to turn into neutron (939.56542 MeV)
+	    //emit positron (0.510998 MeV mass) and electron neutrino (.42 MeV for p-p, maybe percentage of excess energy, at least .42 MeV?)
+	    //net would be negative 2.22 MeV
+	    newz--;
+	    newn++;
+	    
+	}
+	if(newatom.nx < newn){ //if there are too many neutrons
+	    //beta decay or n decay, depending on energy
+	    //use neutron (939.56542 MeV) to turn into proton (938.27209 MeV)
+	    //emit electron (0.510998 MeV mass) and electron neutrino (.42 MeV for p-p)
+	    //net would be positive .36 MeV, but is described in nucleotide data
+	    //neutron decay is negative neutron binding energy 
+	}
+	
+	
     }
     
 }
 
 
 //2D array of element objects?  Element object contains { mass energy excess, [decay modes, chances, energy], decay time, thermal neutron capture? fusion chance?} ?
+
