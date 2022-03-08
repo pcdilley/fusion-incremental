@@ -1,6 +1,14 @@
-//need to create fusion options and a handler to pick an adequate option.
+
+//need to create fusion options and a handler to pick an adequate option.  Maybe happens in fuse code?
 
 
+//vector of atoms:
+//z is z-number
+//nm is minimum neutrons allowed
+//nx is maximum neutrons allowed
+//me[] is an array of mass excesses by n-number offset by nm 
+//hl[] is an array of half-life times and decay types by n-number (null if stable)
+//to-do: add more variables: name, symbol, beta decay energy, neutron binding energy, ...
 let atoms = [];
 atoms.push({z:0, nm:1, nx:1, me:[8071],hl:[1613]});
 atoms.push({z:1, nm:0, nx:3, me:[7288,13135,14949,24620],hl:[null,null,[3.9e8,"n"],[4,"n"]]});

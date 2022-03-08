@@ -1,121 +1,124 @@
-elements {
-    n, z=0, name=Neutron
-    H, z=1, name=Hydrogen
-    He, z=2, name=Helium
-    Li, z=3, name=Lithium
-    Be, z=4, name=Beryllium
-    B, z=5, name=Boron
-    C, z=6, name=Carbon
-    N, z=7, name=Nitrogen
-    O, z=8, name=Oxygen
-    F, z=9, name=Fluorine
-    Ne, z=10, name=Neon
-    Na, z=11, name=Sodium
-    Mg, z=12, name=Magnesium
-    Al, z=13, name=Aluminium
-    Si, z=14, name=Silicon
-    P, z=15, name=Phosphorus
-    S, z=16, name=Sulfur
-    Cl, z=17, name=Chlorine
-    Ar, z=18, name=Argon
-    K, z=19, name=Potassium
-    Ca, z=20, name=Calcium
-    Sc, z=21, name=Scandium
-    Ti, z=22, name=Titanium
-    V, z=23, name=Vanadium
-    Cr, z=24, name=Chromium
-    Mn, z=25, name=Manganese
-    Fe, z=26, name=Iron
-    Co, z=27, name=Cobalt
-    Ni, z=28, name=Nickel
-    Cu, z=29, name=Copper
-    Zn, z=30, name=Zinc
-    Ga, z=31, name=Gallium
-    Ge, z=32, name=Germanium
-    As, z=33, name=Arsenic
-    Se, z=34, name=Selenium
-    Br, z=35, name=Bromine
-    Kr, z=36, name=Krypton
-    Rb, z=37, name=Rubidium
-    Sr, z=38, name=Strontium
-    Y, z=39, name=Yttrium
-    Zr, z=40, name=Zirconium
-    Nb, z=41, name=Niobium
-    Mo, z=42, name=Molybdenum
-    Tc, z=43, name=Technetium
-    Ru, z=44, name=Ruthenium
-    Rh, z=45, name=Rhodium
-    Pd, z=46, name=Palladium
-    Ag, z=47, name=Silver
-    Cd, z=48, name=Cadmium
-    In, z=49, name=Indium
-    Sn, z=50, name=Tin
-    Sb, z=51, name=Antimony
-    Te, z=52, name=Tellurium
-    I, z=53, name=Iodine
-    Xe, z=54, name=Xenon
-    Cs, z=55, name=Cesium
-    Ba, z=56, name=Barium
-    La, z=57, name=Lanthanum
-    Ce, z=58, name=Cerium
-    Pr, z=59, name=Praseodymium
-    Nd, z=60, name=Neodymium
-    Pm, z=61, name=Promethium
-    Sm, z=62, name=Samarium
-    Eu, z=63, name=Europium
-    Gd, z=64, name=Gadolinium
-    Tb, z=65, name=Terbium
-    Dy, z=66, name=Dysprosium
-    Ho, z=67, name=Holmium
-    Er, z=68, name=Erbium
-    Tm, z=69, name=Thulium
-    Yb, z=70, name=Ytterbium
-    Lu, z=71, name=Lutetium
-    Hf, z=72, name=Hafnium
-    Ta, z=73, name=Tantalum
-    W, z=74, name=Tungsten
-    Re, z=75, name=Rhenium
-    Os, z=76, name=Osmium
-    Ir, z=77, name=Iridium
-    Pt, z=78, name=Platinum
-    Au, z=79, name=Gold
-    Hg, z=80, name=Mercury
-    Tl, z=81, name=Thallium
-    Pb, z=82, name=Lead
-    Bi, z=83, name=Bismuth
-    Po, z=84, name=Polonium
-    At, z=85, name=Astatine
-    Rn, z=86, name=Radon
-    Fr, z=87, name=Francium
-    Ra, z=88, name=Radium
-    Ac, z=89, name=Actinium
-    Th, z=90, name=Thorium
-    Pa, z=91, name=Protactinium
-    U, z=92, name=Uranium
-    Np, z=93, name=Neptunium
-    Pu, z=94, name=Plutonium
-    Am, z=95, name=Americium
-    Cm, z=96, name=Curium
-    Bk, z=97, name=Berkelium
-    Cf, z=98, name=Californium
-    Es, z=99, name=Einsteinium
-    Fm, z=100, name=Fermium
-    Md, z=101, name=Mendelevium
-    No, z=102, name=Nobelium
-    Lr, z=103, name=Lawrencium
-    Rf, z=104, name=Rutherfordium
-    Db, z=105, name=Dubnium
-    Sg, z=106, name=Seaborgium
-    Bh, z=107, name=Bohrium
-    Hs, z=108, name=Hassium
-    Mt, z=109, name=Meitnerium
-    Ds, z=110, name=Darmstadtium
-    Rg, z=111, name=Roentgenium
-    Cn, z=112, name=Copernicium
-    Nh, z=113, name=Nihonium
-    Fl, z=114, name=Flerovium
-    Mc, z=115, name=Moscovium
-    Lv, z=116, name=Livermorium
-    Ts, z=117, name=Tennessine
-    Og, z=118, name=Oganesson
-}
+//vector with all elements, their symbols, and their full names
+
+let elements = [
+    {symbol:"n", z:0, name:"Neutron" },
+    { symbol:"H", z:1, name:"Hydrogen" },
+    { symbol:"He", z:2, name:"Helium" },
+    { symbol:"Li", z:3, name:"Lithium" },
+    { symbol:"Be", z:4, name:"Beryllium" },
+    { symbol:"B", z:5, name:"Boron" },
+    { symbol:"C", z:6, name:"Carbon" },
+    { symbol:"N", z:7, name:"Nitrogen" },
+    { symbol:"O", z:8, name:"Oxygen" },
+    { symbol:"F", z:9, name:"Fluorine" },
+    { symbol:"Ne", z:10, name:"Neon" },
+    { symbol:"Na", z:11, name:"Sodium" },
+    { symbol:"Mg", z:12, name:"Magnesium" },
+    { symbol:"Al", z:13, name:"Aluminium" },
+    { symbol:"Si", z:14, name:"Silicon" },
+    { symbol:"P", z:15, name:"Phosphorus" },
+    { symbol:"S", z:16, name:"Sulfur" },
+    { symbol:"Cl", z:17, name:"Chlorine" },
+    { symbol:"Ar", z:18, name:"Argon" },
+    { symbol:"K", z:19, name:"Potassium" },
+    { symbol:"Ca", z:20, name:"Calcium" },
+    { symbol:"Sc", z:21, name:"Scandium" },
+    { symbol:"Ti", z:22, name:"Titanium" },
+    { symbol:"V", z:23, name:"Vanadium" },
+    { symbol:"Cr", z:24, name:"Chromium" },
+    { symbol:"Mn", z:25, name:"Manganese" },
+    { symbol:"Fe", z:26, name:"Iron" },
+    { symbol:"Co", z:27, name:"Cobalt" },
+    { symbol:"Ni", z:28, name:"Nickel" },
+    { symbol:"Cu", z:29, name:"Copper" },
+    { symbol:"Zn", z:30, name:"Zinc" },
+    { symbol:"Ga", z:31, name:"Gallium" },
+    { symbol:"Ge", z:32, name:"Germanium" },
+    { symbol:"As", z:33, name:"Arsenic" },
+    { symbol:"Se", z:34, name:"Selenium" },
+    { symbol:"Br", z:35, name:"Bromine" },
+    { symbol:"Kr", z:36, name:"Krypton" },
+    { symbol:"Rb", z:37, name:"Rubidium" },
+    { symbol:"Sr", z:38, name:"Strontium" },
+    { symbol:"Y", z:39, name:"Yttrium" },
+    { symbol:"Zr", z:40, name:"Zirconium" },
+    { symbol:"Nb", z:41, name:"Niobium" },
+    { symbol:"Mo", z:42, name:"Molybdenum" },
+    { symbol:"Tc", z:43, name:"Technetium" },
+    { symbol:"Ru", z:44, name:"Ruthenium" },
+    { symbol:"Rh", z:45, name:"Rhodium" },
+    { symbol:"Pd", z:46, name:"Palladium" },
+    { symbol:"Ag", z:47, name:"Silver" },
+    { symbol:"Cd", z:48, name:"Cadmium" },
+    { symbol:"In", z:49, name:"Indium" },
+    { symbol:"Sn", z:50, name:"Tin" },
+    { symbol:"Sb", z:51, name:"Antimony" },
+    { symbol:"Te", z:52, name:"Tellurium" },
+    { symbol:"I", z:53, name:"Iodine" },
+    { symbol:"Xe", z:54, name:"Xenon" },
+    { symbol:"Cs", z:55, name:"Cesium" },
+    { symbol:"Ba", z:56, name:"Barium" },
+    { symbol:"La", z:57, name:"Lanthanum" },
+    { symbol:"Ce", z:58, name:"Cerium" },
+    { symbol:"Pr", z:59, name:"Praseodymium" },
+    { symbol:"Nd", z:60, name:"Neodymium" },
+    { symbol:"Pm", z:61, name:"Promethium" },
+    { symbol:"Sm", z:62, name:"Samarium" },
+    { symbol:"Eu", z:63, name:"Europium" },
+    { symbol:"Gd", z:64, name:"Gadolinium" },
+    { symbol:"Tb", z:65, name:"Terbium" },
+    { symbol:"Dy", z:66, name:"Dysprosium" },
+    { symbol:"Ho", z:67, name:"Holmium" },
+    { symbol:"Er", z:68, name:"Erbium" },
+    { symbol:"Tm", z:69, name:"Thulium" },
+    { symbol:"Yb", z:70, name:"Ytterbium" },
+    { symbol:"Lu", z:71, name:"Lutetium" },
+    { symbol:"Hf", z:72, name:"Hafnium" },
+    { symbol:"Ta", z:73, name:"Tantalum" },
+    { symbol:"W", z:74, name:"Tungsten" },
+    { symbol:"Re", z:75, name:"Rhenium" },
+    { symbol:"Os", z:76, name:"Osmium" },
+    { symbol:"Ir", z:77, name:"Iridium" },
+    { symbol:"Pt", z:78, name:"Platinum" },
+    { symbol:"Au", z:79, name:"Gold" },
+    { symbol:"Hg", z:80, name:"Mercury" },
+    { symbol:"Tl", z:81, name:"Thallium" },
+    { symbol:"Pb", z:82, name:"Lead" },
+    { symbol:"Bi", z:83, name:"Bismuth" },
+    { symbol:"Po", z:84, name:"Polonium" },
+    { symbol:"At", z:85, name:"Astatine" },
+    { symbol:"Rn", z:86, name:"Radon" },
+    { symbol:"Fr", z:87, name:"Francium" },
+    { symbol:"Ra", z:88, name:"Radium" },
+    { symbol:"Ac", z:89, name:"Actinium" },
+    { symbol:"Th", z:90, name:"Thorium" },
+    { symbol:"Pa", z:91, name:"Protactinium" },
+    { symbol:"U", z:92, name:"Uranium" },
+    { symbol:"Np", z:93, name:"Neptunium" },
+    { symbol:"Pu", z:94, name:"Plutonium" },
+    { symbol:"Am", z:95, name:"Americium" },
+    { symbol:"Cm", z:96, name:"Curium" },
+    { symbol:"Bk", z:97, name:"Berkelium" },
+    { symbol:"Cf", z:98, name:"Californium" },
+    { symbol:"Es", z:99, name:"Einsteinium" },
+    { symbol:"Fm", z:100, name:"Fermium" },
+    { symbol:"Md", z:101, name:"Mendelevium" },
+    { symbol:"No", z:102, name:"Nobelium" },
+    { symbol:"Lr", z:103, name:"Lawrencium" },
+    { symbol:"Rf", z:104, name:"Rutherfordium" },
+    { symbol:"Db", z:105, name:"Dubnium" },
+    { symbol:"Sg", z:106, name:"Seaborgium" },
+    { symbol:"Bh", z:107, name:"Bohrium" },
+    { symbol:"Hs", z:108, name:"Hassium" },
+    { symbol:"Mt", z:109, name:"Meitnerium" },
+    { symbol:"Ds", z:110, name:"Darmstadtium" },
+    { symbol:"Rg", z:111, name:"Roentgenium" },
+    { symbol:"Cn", z:112, name:"Copernicium" },
+    { symbol:"Nh", z:113, name:"Nihonium" },
+    { symbol:"Fl", z:114, name:"Flerovium" },
+    { symbol:"Mc", z:115, name:"Moscovium" },
+    { symbol:"Lv", z:116, name:"Livermorium" },
+    { symbol:"Ts", z:117, name:"Tennessine" },
+    { symbol:"Og", z:118, name:"Oganesson" },
+]
+   

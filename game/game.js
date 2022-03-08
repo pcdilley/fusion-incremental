@@ -1,20 +1,16 @@
-var initId = 0;
 var world;
 var ctx;
 var canvasWidth;
 var canvasHeight;
-var keys=[];
-var hydrogen = 0;
-var heat=0;
 
 Event.observe(window, 'load', function() {
-    world = createWorld(); // box2DWorld 
-    ctx = $('game').getContext('2d'); // 2
+    world = createWorld(); 
+    ctx = $('game').getContext('2d');
     var canvasElm = $('game');
     canvasWidth = parseInt(canvasElm.width);
     canvasHeight = parseInt(canvasElm.height);
-    initGame(); // 3
-    step(); // 4
+    initGame();
+    step(); 
 });
 
 

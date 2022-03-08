@@ -1,3 +1,4 @@
+//mass excesses from nucleotides table
 z=0,n=1,e=8071.3181
 z=1,n=0,e=7288.971064
 z=1,n=1,e=13135.722895

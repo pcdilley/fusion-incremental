@@ -1,3 +1,5 @@
+//decay data from nucleotides table, not yet ready to import
+
 decayMatrix = {
     z = 0, t=1,613.9 s 6, types = { B: 100; } //probably not right.  List of decay products could be condensed if reversed?
 
