@@ -155,51 +155,61 @@ function spawnH() {
 }
 
 function fuseParticles(par1, par2) {
+
+    //fusion code should result in CNO cycle: https://en.wikipedia.org/wiki/CNO_cycle
     //TODO fuse code
     var ud1=par1.GetUserData();
     var ud2=par2.GetUserData();
+    //track momentum
+    xbudget = par1.m_linearVelocity.x * (ud1[0]+ud1[1]) + par2.m_linearVelocity.x * (ud2[0]+ud2[1]);
+    ybudget = par1.m_linearVelocity.y * (ud1[0]+ud1[1]) + par2.m_linearVelocity.y * (ud2[0]+ud2[1]);
+    console.log("total momentum is ", xbudget, ybudget);
     
-    var te = (ud1[2] + ud2[2]) *1.5 * kb   //thermal energy is kb * 3/2 * T per particle (eV)
+    //thermal energy is kb * 3/2 * T per particle (eV)
+    var te = (ud1[2]**2 + ud2[2]**2) *1.5 * kb
     //calculate mass energy of particle pairings
     //atoms contains atom objects: {z, nm, nx, me:[KeV],hl:[s]}
     var atom1 = atoms[ud1[0]];
     var atom2 = atoms[ud2[0]];
-    console.log("thermal energy is ", te, " and atomic mass excesses are ", atom1.me[ud1[1]], " and ", atom2.me[ud2[1]], "eV");
-    te = te - atom1.me[ud1[1]]*1000 - atom2.me[ud2[1]]*1000;
-    
+    console.log("thermal energy is ", te, " eV and atomic mass excesses are ", atom1.me[ud1[1]], " and ", atom2.me[ud2[1]], "KeV");
+    te = te + atom1.me[ud1[1]]*1000 + atom2.me[ud2[1]]*1000;
     console.log("houston, we have ignition, temp is", te);
     var newz=ud1[0]+ud2[0];
     var newn=ud1[1]+ud2[1];
     console.log("next we attempt to FUSE into ", newz, newn);
 
     var newatom = atoms[newz];
-    if (newatom != null) {
-	console.log("wow!  it's happening!  new atom can have between ", newatom.nm, " and ", newatom.nx, " neutrons");
+    if (newatom != null) {  //make sure there's a valid particle to fuse into
+	console.log("wow!  it's happening!");
 
-	//fuse code here//
-	
-	if(newatom.nm > newn){ //if there aren't enough neutrons
-	    //positron decay (or epsilon, but not now)
-	    //use proton (938.27209 MeV) to turn into neutron (939.56542 MeV)
-	    //emit positron (0.510998 MeV mass) and electron neutrino (.42 MeV for p-p, maybe percentage of excess energy, at least .42 MeV?)
-	    //net would be negative 2.22 MeV
-	    newz--;
-	    newn++;
-	    
+	//adjust neutron count
+	while(newatom.nm > newn || newatom.nx < newn) {
+	    if(newatom.nm > newn){ //if there aren't enough neutrons
+		//positron decay (or proton, but not now)
+		//electron neutrino has .42 MeV for p-p, maybe percentage of excess energy, at least .42 MeV?  Determined by the wavefunction of the reaction.
+		//this method is mediated by the weak nuclear force, so it will be uncommon to occur.  A neutron conversion needs to happen before a proton fisses off, which will be different for different atoms
+		newz--;
+		newn++;
+		te = te - 510998*2; //- 420000; //ev: -e+, -ve, -e-: nm = pm + e- to adjust to the correct neutron mass without excess
+	    }
+	    if(newatom.nx < newn){ //if there are too many neutrons
+		//beta decay or n decay, depending on energy
+		//use neutron (939.56542 MeV) to turn into proton (938.27209 MeV)
+		//emit electron (0.510998 MeV mass) and electron neutrino (.42 MeV for p-p)
+		//net would be -e-, -ve, +e- (neutron mass difference), but is defined in nucleotide data
+		//neutron decay is based on neutron binding energy
+		newz++;
+		newn--;
+		te = te; //- 420000;
+	    }
+	    newatom = atoms[newz];
 	}
-	if(newatom.nx < newn){ //if there are too many neutrons
-	    //beta decay or n decay, depending on energy
-	    //use neutron (939.56542 MeV) to turn into proton (938.27209 MeV)
-	    //emit electron (0.510998 MeV mass) and electron neutrino (.42 MeV for p-p)
-	    //net would be positive .36 MeV, but is described in nucleotide data
-	    //neutron decay is negative neutron binding energy 
-	}
-	
-	
+	//new atom has valid number of neutrons now
+	console.log("well actually we're trying to fuse into", newz, newn);
+	te = te - newatom.me[newn]*1000;
+	console.log("new atom would have thermal energy of ", te);
     }
     
 }
 
-
-//2D array of element objects?  Element object contains { mass energy excess, [decay modes, chances, energy], decay time, thermal neutron capture? fusion chance?} ?
 
