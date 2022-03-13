@@ -1,0 +1,11 @@
+Start with no walls, buildable with higher tier atoms, each wall requiring higher tiers in addition to more of the lower tier atoms?
+
+Hydrogen spawn has a short cooldown/charge time, to limit spamming particles.  Starting temp is low, to give more time for collision.
+
+Shrink visuals for atom while keeping their current physical size (or maybe a bit smaller).
+
+Feynman diagram could be dynamically composed from svg animations.
+
+Hydrogen can be used to buy hydrogen spawners, with exponential cost scaling.
+
+Photons used to increase heat?  Heat increasing with each successful fuse?  Later upgrade to allow neutrinos to add to heat? (would likely be too much heat)
