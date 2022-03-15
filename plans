@@ -1,3 +1,5 @@
+Black color scheme with each particle represented by their alpha line color.
+
 Start with no walls, buildable with higher tier atoms, each wall requiring higher tiers in addition to more of the lower tier atoms?
 
 Hydrogen spawn has a short cooldown/charge time, to limit spamming particles.  Starting temp is low, to give more time for collision.

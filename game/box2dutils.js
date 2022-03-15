@@ -1,34 +1,9 @@
-var radius = 400;
-var ambientheat = 15000000;
-var totalmass = 30;
+var radius = 400;  
+var ambientheat = 15000000; //heat is in velocity^2 units right now, can be converted with kb to eV per molecule
+var totalmass = 30;  //placeholder globals, need to find a way to do this more cleanly
 
-let kb = 8.617333e-5
-let pi = 3.1415926535;
-
-//Collision code "borrowed" from https://stackoverflow.com/questions/8982349/on-collision-event-handlers-in-box2djs by John Carter
-var FusionCollisionCallback = function() {
-    this.ShouldCollide = function(shape1, shape2)
-    {
-	var bd1 = shape1.m_body;
-	var bd2 = shape2.m_body;
-	if(bd1.UserData) { //check if it's an atom
-	    if(bd2.UserData) {
-	    }
-	}
-
-	console.log("yeah we got contact");
-	if (shape1.m_groupIndex == shape2.m_groupIndex && shape1.m_groupIndex != 0)
-            {
-            return shape1.m_groupIndex > 0;
-            }
-
-        var collide = (shape1.m_maskBits & shape2.m_categoryBits) != 0 && (shape1.m_categoryBits & shape2.m_maskBits) != 0;
-
-        return collide;
-    }
-    return this;
-}
-
+let kb = 8.617333e-5;  //boltzmann's constant
+let pi = 3.1415926535; //pi
 
 function drawWorld(world, context) {
 	for (var b = world.m_bodyList; b; b = b.m_next) {
@@ -39,7 +14,7 @@ function drawWorld(world, context) {
 }
 
 function drawShape(shape, context) {
-	context.strokeStyle = '#000000';
+	context.strokeStyle = '#000000'; //TODO: color differently depending on atom
 	context.beginPath();
 	switch (shape.m_type) {
 	case b2Shape.e_circleShape:
@@ -69,9 +44,14 @@ function drawShape(shape, context) {
 			context.moveTo(tV.x, tV.y);
 			for (var i = 0; i < poly.m_vertexCount; i++) {
 				var v = b2Math.AddVV(poly.m_position, b2Math.b2MulMV(poly.m_R, poly.m_vertices[i]));
-				context.lineTo(v.x, v.y);
+			    if(i%2 == 1) { //only draw interior/exterior
+				context.lineTo(v.x, v.y); 
+			    }
+			    else {
+				context.moveTo(v.x,v.y);
+			    }
 			}
-			context.lineTo(tV.x, tV.y);
+//			context.lineTo(tV.x, tV.y);
 		}
 		break;
 	}
@@ -86,8 +66,6 @@ function createWorld() {
     var gravity = new b2Vec2(0, 0);
     var doSleep = true;
     var world = new b2World(worldAABB, gravity, doSleep);
-    myCollisionCallback = new FusionCollisionCallback(); //sets up a collision filter so we can achieve fusion
-    world.SetFilter(myCollisionCallback);
     return world;
 }
 
